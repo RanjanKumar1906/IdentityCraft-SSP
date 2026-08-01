@@ -47,6 +47,8 @@ function csrfProtection(req, res, next) {
 
 async function verifyRecaptcha(token, remoteIp) {
   const secretKey = process.env.RECAPTCHA_SECRET_KEY;
+  const threshold = parseFloat(process.env.RECAPTCHA_SCORE_THRESHOLD || '0.7');
+
   if (!secretKey) {
     console.log('reCAPTCHA secret key is not set. Bypassing verification (Mock Approval).');
     return true;
@@ -70,15 +72,18 @@ async function verifyRecaptcha(token, remoteIp) {
         remoteip: remoteIp || ''
       })
     });
-    
+
     const data = await response.json();
     console.log('reCAPTCHA validation response:', data);
-    
-    if (data.success && data.score >= 0.7) {
+
+    const hasScore = typeof data.score === 'number';
+    const scoreOk = hasScore ? data.score >= threshold : true;
+
+    if (data.success && scoreOk) {
       return true;
     }
-    
-    console.warn(`reCAPTCHA validation failed. Score: ${data.score || 0}, Success: ${data.success}`);
+
+    console.warn(`reCAPTCHA validation failed. Score: ${data.score ?? 'n/a'}, Success: ${data.success}, Threshold: ${threshold}`);
     return false;
   } catch (error) {
     console.error('Error validating reCAPTCHA token:', error);
