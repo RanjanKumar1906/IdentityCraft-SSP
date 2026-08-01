@@ -1,0 +1,108 @@
+<%- include('partials/header') %>
+
+<div class="row justify-content-center align-items-center" style="min-height: 70vh;">
+  <div class="col-md-5">
+    <div class="card glass-panel shadow-lg border-0">
+      <div class="card-body p-4 p-md-5 text-center">
+        <div class="mb-4">
+          <i class="fas fa-lock-open text-success fa-3x mb-3"></i>
+          <h2 class="fw-bold mb-1">Set New Password</h2>
+          <p class="text-secondary text-muted">Create a strong, secure password for your administrator account.</p>
+        </div>
+
+        <!-- Alerts -->
+        <% if (locals.errors && locals.errors.length > 0) { %>
+          <div class="alert alert-danger alert-dismissible fade show text-start" role="alert">
+            <% locals.errors.forEach(function(err) { %>
+              <div class="small"><i class="fas fa-times-circle me-1"></i><%= err %></div>
+            <% }) %>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        <% } %>
+
+        <form action="/reset-password" method="POST" id="auth-form" class="text-start">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+          <input type="hidden" name="grecaptcha_token" id="recaptcha-token">
+          <input type="hidden" name="token" value="<%= token %>">
+          
+          <div class="mb-3">
+            <label for="password" class="form-label fw-bold text-secondary small">New Password</label>
+            <div class="search-wrapper">
+              <i class="fas fa-lock"></i>
+              <input type="password" class="form-control" id="password" name="password" placeholder="Enter new password" autocomplete="new-password" required minlength="8">
+            </div>
+            <div class="form-text text-muted small">Must be at least 8 characters.</div>
+          </div>
+          
+          <div class="mb-3">
+            <label for="confirm_password" class="form-label fw-bold text-secondary small">Confirm New Password</label>
+            <div class="search-wrapper">
+              <i class="fas fa-check-double"></i>
+              <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="Confirm new password" autocomplete="new-password" required minlength="8">
+
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary w-100 mt-2 py-2 fw-bold">
+            <i class="fas fa-save me-2"></i>Reset Password
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="/js/public-app.js"></script>
+
+<% if (locals.recaptchaSiteKey) { %>
+  <script src="https://www.google.com/recaptcha/api.js?render=<%= recaptchaSiteKey %>"></script>
+  <script>
+    document.getElementById('auth-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const form = this;
+      
+      const p1 = document.getElementById('password').value;
+      const p2 = document.getElementById('confirm_password').value;
+      if (p1 !== p2) {
+        alert("Passwords do not match!");
+        return;
+      }
+      
+      const submitBtn = form.querySelector('button[type="submit"]');
+      if (submitBtn) {
+        submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Verifying...';
+      }
+
+      grecaptcha.ready(function() {
+        grecaptcha.execute('<%= recaptchaSiteKey %>', {action: 'reset'}).then(function(token) {
+          document.getElementById('recaptcha-token').value = token;
+          if (typeof muteAllButtons === 'function') {
+            muteAllButtons(submitBtn);
+          } else if (submitBtn) {
+            submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Processing...';
+            submitBtn.disabled = true;
+          }
+          form.submit();
+        }).catch(function(err) {
+          console.error('reCAPTCHA error:', err);
+          if (submitBtn) {
+            submitBtn.innerHTML = '<i class="fas fa-save me-2"></i>Reset Password';
+          }
+        });
+      });
+    });
+  </script>
+<% } else { %>
+  <script>
+    document.getElementById('auth-form').addEventListener('submit', function(e) {
+      const p1 = document.getElementById('password').value;
+      const p2 = document.getElementById('confirm_password').value;
+      if (p1 !== p2) {
+        e.preventDefault();
+        alert("Passwords do not match!");
+      }
+    });
+  </script>
+<% } %>
+
+<%- include('partials/footer') %>

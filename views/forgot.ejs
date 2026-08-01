@@ -1,0 +1,96 @@
+<%- include('partials/header') %>
+
+<div class="row justify-content-center align-items-center" style="min-height: 70vh;">
+  <div class="col-md-5">
+    <div class="card glass-panel shadow-lg border-0">
+      <div class="card-body p-4 p-md-5 text-center">
+        <div class="mb-4">
+          <i class="fas fa-key text-warning fa-3x mb-3"></i>
+          <h2 class="fw-bold mb-1">Recover Password</h2>
+          <p class="text-secondary text-muted">Enter your admin email and secret code to receive a temporary password by email.</p>
+        </div>
+
+        <!-- Alerts -->
+        <% if (locals.errors && locals.errors.length > 0) { %>
+          <div class="alert alert-danger alert-dismissible fade show text-start" role="alert">
+            <% locals.errors.forEach(function(err) { %>
+              <div class="small"><i class="fas fa-times-circle me-1"></i><%= err %></div>
+            <% }) %>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        <% } %>
+
+        <% if (locals.success_msg) { %>
+          <div class="alert alert-success alert-dismissible fade show text-start" role="alert">
+            <div class="small"><i class="fas fa-check-circle me-1"></i><%= success_msg %></div>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        <% } %>
+
+        <form action="/forgot-password" method="POST" id="auth-form" class="text-start">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+          <input type="hidden" name="grecaptcha_token" id="recaptcha-token">
+          
+          <div class="mb-3">
+            <label for="email" class="form-label fw-bold text-secondary small">Admin Email Address</label>
+            <div class="search-wrapper">
+              <i class="fas fa-envelope"></i>
+              <input type="email" class="form-control" id="email" name="email" placeholder="Enter admin email address" required value="<%= locals.formData ? locals.formData.email : '' %>">
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="secret_code" class="form-label fw-bold text-secondary small">Secret Code</label>
+            <div class="search-wrapper">
+              <i class="fas fa-shield-alt"></i>
+              <input type="text" class="form-control" id="secret_code" name="secret_code" placeholder="Enter your admin secret code" required>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary w-100 mt-2 py-2 fw-bold">
+            <i class="fas fa-paper-plane me-2"></i>Send Temporary Password
+          </button>
+        </form>
+        
+        <div class="mt-4">
+          <a href="/login" class="text-decoration-none small"><i class="fas fa-arrow-left me-1"></i>Back to Sign In</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="/js/public-app.js"></script>
+
+<% if (locals.recaptchaSiteKey) { %>
+  <script src="https://www.google.com/recaptcha/api.js?render=<%= recaptchaSiteKey %>"></script>
+  <script>
+    document.getElementById('auth-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const form = this;
+      const submitBtn = form.querySelector('button[type="submit"]');
+      if (submitBtn) {
+        submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Verifying...';
+      }
+      grecaptcha.ready(function() {
+        grecaptcha.execute('<%= recaptchaSiteKey %>', {action: 'forgot'}).then(function(token) {
+          document.getElementById('recaptcha-token').value = token;
+          if (typeof muteAllButtons === 'function') {
+            muteAllButtons(submitBtn);
+          } else if (submitBtn) {
+            submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Processing...';
+            submitBtn.disabled = true;
+          }
+          form.submit();
+        }).catch(function(err) {
+          console.error('reCAPTCHA error:', err);
+          if (submitBtn) {
+            submitBtn.innerHTML = '<i class="fas fa-paper-plane me-2"></i>Recover Password';
+          }
+        });
+      });
+    });
+  </script>
+<% } %>
+
+<%- include('partials/footer') %>
