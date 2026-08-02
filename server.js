@@ -291,8 +291,15 @@ app.get('/login', (req, res) => {
 });
 
 app.post('/login', async (req, res) => {
-  const { email, password, grecaptcha_token } = req.body;
+  const email = (req.body.email || '').trim().toLowerCase();
+  const password = req.body.password || '';
+  const grecaptcha_token = req.body.grecaptcha_token || '';
   req.session.formData = { email };
+
+  if (!email || !password) {
+    req.session.errors = ['Admin email and password are required.'];
+    return res.redirect('/login');
+  }
 
   try {
     // Verify reCAPTCHA
@@ -302,7 +309,7 @@ app.post('/login', async (req, res) => {
       return res.redirect('/login');
     }
 
-    const admin = await query.get('SELECT * FROM admins WHERE email = ?', [email]);
+    const admin = await query.get('SELECT * FROM admins WHERE LOWER(email) = ?', [email]);
     if (!admin) {
       req.session.errors = ['Invalid email address or password.'];
       return res.redirect('/login');
@@ -331,11 +338,17 @@ app.get('/forgot-password', (req, res) => {
 });
 
 app.post('/forgot-password', async (req, res) => {
-  const { email, secret_code } = req.body;
+  const email = (req.body.email || '').trim().toLowerCase();
+  const secret_code = (req.body.secret_code || '').trim();
   req.session.formData = { email };
 
+  if (!email || !secret_code) {
+    req.session.errors = ['Email address and security secret code are required.'];
+    return res.redirect('/forgot-password');
+  }
+
   try {
-    const admin = await query.get('SELECT * FROM admins WHERE email = ? AND secret_code = ?', [email, secret_code]);
+    const admin = await query.get('SELECT * FROM admins WHERE LOWER(email) = ? AND secret_code = ?', [email, secret_code]);
     if (!admin) {
       req.session.errors = ['Invalid email address or security secret code.'];
       return res.redirect('/forgot-password');
