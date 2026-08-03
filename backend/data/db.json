@@ -1,0 +1,912 @@
+{
+  "admins": [
+    {
+      "id": "msct51zw1n8i1",
+      "username": "admin",
+      "email": "servicestatusapp1906@gmail.com",
+      "password_hash": "$2a$10$NGA/IvzbhNpfBdT7Ou7fT.LJhtWcSSylPsq5fxA4zyzXqK2d4MH.K",
+      "secret_code": "12313163",
+      "created_at": "2026-08-03T05:47:34.364Z",
+      "updated_at": "2026-08-03T08:45:31.290Z",
+      "reset_token": null,
+      "reset_token_expires": null
+    },
+    {
+      "id": "msct5itj6ch6z",
+      "username": "admin",
+      "email": "servicestatusapp1906@gmail.com",
+      "password_hash": "$2a$10$3f.E2gZrcubJzucynWoBzuaBLtYpvOJnuMjKwDK4xtyWBJq.ccwfm",
+      "secret_code": "StatusSecret99!",
+      "created_at": "2026-08-03T05:47:56.167Z"
+    },
+    {
+      "id": "msctahgw054p9",
+      "username": "admin",
+      "email": "servicestatusapp1906@gmail.com",
+      "password_hash": "$2a$10$jFzxqf4m2R9G1z2KYafUjuaQ5XgcR1.zSnFHVClY5PKX7OG1Vq7Xq",
+      "secret_code": "StatusSecret99!",
+      "created_at": "2026-08-03T05:51:47.696Z"
+    },
+    {
+      "id": "msczc4cerxhk8",
+      "created_at": "2026-08-03T08:41:01.694Z",
+      "updated_at": "2026-08-03T08:41:01.695Z"
+    },
+    {
+      "id": "msczchsregjrp",
+      "username": "admin",
+      "email": "servicestatusapp1906@gmail.com",
+      "password_hash": "$2a$10$elu4EQtH4OtRf7IkH3kI1.PwwuC9tK6oKxUAlIqLNLSrFovYQDNKS",
+      "secret_code": "StatusSecret99!",
+      "created_at": "2026-08-03T08:41:19.131Z"
+    }
+  ],
+  "servers": [
+    {
+      "id": "msct51zxonyqo",
+      "server_name": "Web Host USA 01",
+      "server_code": "SRV-USA-01",
+      "ip_address": "192.168.1.10",
+      "location": "New York, USA",
+      "status": "Operational",
+      "description": "Primary shared hosting server for US clients.",
+      "created_at": "2026-08-03T05:47:34.365Z"
+    },
+    {
+      "id": "msct51zyftjk3",
+      "server_name": "Database Cluster EU",
+      "server_code": "SRV-EU-DB",
+      "ip_address": "10.0.2.15",
+      "location": "Frankfurt, Germany",
+      "status": "Operational",
+      "description": "High-performance database hosting.",
+      "created_at": "2026-08-03T05:47:34.366Z"
+    },
+    {
+      "id": "msct51zyk1rrh",
+      "server_name": "Email Gateway APAC",
+      "server_code": "SRV-APAC-MAIL",
+      "ip_address": "172.16.5.4",
+      "location": "Singapore",
+      "status": "Operational",
+      "description": "SMTP and IMAP mail routing server.",
+      "created_at": "2026-08-03T05:47:34.366Z"
+    },
+    {
+      "id": "msct5itm0u5tq",
+      "server_name": "Web Host USA 01",
+      "server_code": "SRV-USA-01",
+      "ip_address": "192.168.1.10",
+      "location": "New York, USA",
+      "status": "Operational",
+      "description": "Primary shared hosting server for US clients.",
+      "created_at": "2026-08-03T05:47:56.170Z"
+    },
+    {
+      "id": "msct5itpfoibe",
+      "server_name": "Database Cluster EU",
+      "server_code": "SRV-EU-DB",
+      "ip_address": "10.0.2.15",
+      "location": "Frankfurt, Germany",
+      "status": "Operational",
+      "description": "High-performance database hosting.",
+      "created_at": "2026-08-03T05:47:56.173Z"
+    },
+    {
+      "id": "msct5itpnuanj",
+      "server_name": "Email Gateway APAC",
+      "server_code": "SRV-APAC-MAIL",
+      "ip_address": "172.16.5.4",
+      "location": "Singapore",
+      "status": "Operational",
+      "description": "SMTP and IMAP mail routing server.",
+      "created_at": "2026-08-03T05:47:56.173Z"
+    },
+    {
+      "id": "msctahgy7clmq",
+      "server_name": "Web Host USA 01",
+      "server_code": "SRV-USA-01",
+      "ip_address": "192.168.1.10",
+      "location": "New York, USA",
+      "status": "Operational",
+      "description": "Primary shared hosting server for US clients.",
+      "created_at": "2026-08-03T05:51:47.698Z"
+    },
+    {
+      "id": "msctahgzurbid",
+      "server_name": "Database Cluster EU",
+      "server_code": "SRV-EU-DB",
+      "ip_address": "10.0.2.15",
+      "location": "Frankfurt, Germany",
+      "status": "Operational",
+      "description": "High-performance database hosting.",
+      "created_at": "2026-08-03T05:51:47.699Z"
+    },
+    {
+      "id": "msctahgzg4g8z",
+      "server_name": "Email Gateway APAC",
+      "server_code": "SRV-APAC-MAIL",
+      "ip_address": "172.16.5.4",
+      "location": "Singapore",
+      "status": "Operational",
+      "description": "SMTP and IMAP mail routing server.",
+      "created_at": "2026-08-03T05:51:47.699Z"
+    },
+    {
+      "id": "msczchst75tmn",
+      "server_name": "Web Host USA 01",
+      "server_code": "SRV-USA-01",
+      "ip_address": "192.168.1.10",
+      "location": "New York, USA",
+      "status": "Operational",
+      "description": "Primary shared hosting server for US clients.",
+      "created_at": "2026-08-03T08:41:19.133Z"
+    },
+    {
+      "id": "msczchstpn822",
+      "server_name": "Database Cluster EU",
+      "server_code": "SRV-EU-DB",
+      "ip_address": "10.0.2.15",
+      "location": "Frankfurt, Germany",
+      "status": "Operational",
+      "description": "High-performance database hosting.",
+      "created_at": "2026-08-03T08:41:19.133Z"
+    },
+    {
+      "id": "msczchst5ocuu",
+      "server_name": "Email Gateway APAC",
+      "server_code": "SRV-APAC-MAIL",
+      "ip_address": "172.16.5.4",
+      "location": "Singapore",
+      "status": "Operational",
+      "description": "SMTP and IMAP mail routing server.",
+      "created_at": "2026-08-03T08:41:19.133Z"
+    }
+  ],
+  "clients": [
+    {
+      "id": "msct51zzh6fmv",
+      "client_name": "Acme Corp",
+      "company_name": "Acme Inc.",
+      "contact_person": "John Acme",
+      "email": "contact@acme.com",
+      "phone": "123-456-7890",
+      "created_at": "2026-08-03T05:47:34.367Z"
+    },
+    {
+      "id": "msct5200i6kco",
+      "client_name": "Acme Corp Billing",
+      "company_name": "Acme Inc.",
+      "contact_person": "John Acme",
+      "email": "billing@acme.com",
+      "phone": "123-456-7890",
+      "created_at": "2026-08-03T05:47:34.368Z"
+    },
+    {
+      "id": "msct5201gttyv",
+      "client_name": "John Doe",
+      "company_name": "Doe Ventures",
+      "contact_person": "John Doe",
+      "email": "john@doe.com",
+      "phone": "987-654-3210",
+      "created_at": "2026-08-03T05:47:34.369Z"
+    },
+    {
+      "id": "msct5201ofa45",
+      "client_name": "Global Retail",
+      "company_name": "Global Retail LLC",
+      "contact_person": "Sarah Smith",
+      "email": "ops@globalretail.com",
+      "phone": "555-019-2834",
+      "created_at": "2026-08-03T05:47:34.369Z"
+    },
+    {
+      "id": "msct5202pkpei",
+      "client_name": "Global Retail Mail",
+      "company_name": "Global Retail LLC",
+      "contact_person": "Sarah Smith",
+      "email": "ops@globalretail.com",
+      "phone": "555-019-2834",
+      "created_at": "2026-08-03T05:47:34.370Z"
+    },
+    {
+      "id": "msct5itqrltco",
+      "client_name": "Acme Corp",
+      "company_name": "Acme Inc.",
+      "contact_person": "John Acme",
+      "email": "contact@acme.com",
+      "phone": "123-456-7890",
+      "created_at": "2026-08-03T05:47:56.174Z"
+    },
+    {
+      "id": "msct5itt2cmv0",
+      "client_name": "Acme Corp Billing",
+      "company_name": "Acme Inc.",
+      "contact_person": "John Acme",
+      "email": "billing@acme.com",
+      "phone": "123-456-7890",
+      "created_at": "2026-08-03T05:47:56.177Z"
+    },
+    {
+      "id": "msct5ittm4t6k",
+      "client_name": "John Doe",
+      "company_name": "Doe Ventures",
+      "contact_person": "John Doe",
+      "email": "john@doe.com",
+      "phone": "987-654-3210",
+      "created_at": "2026-08-03T05:47:56.177Z"
+    },
+    {
+      "id": "msct5itubhitm",
+      "client_name": "Global Retail",
+      "company_name": "Global Retail LLC",
+      "contact_person": "Sarah Smith",
+      "email": "ops@globalretail.com",
+      "phone": "555-019-2834",
+      "created_at": "2026-08-03T05:47:56.178Z"
+    },
+    {
+      "id": "msct5itu2oebh",
+      "client_name": "Global Retail Mail",
+      "company_name": "Global Retail LLC",
+      "contact_person": "Sarah Smith",
+      "email": "ops@globalretail.com",
+      "phone": "555-019-2834",
+      "created_at": "2026-08-03T05:47:56.178Z"
+    },
+    {
+      "id": "msctahh0dwksg",
+      "client_name": "Acme Corp",
+      "company_name": "Acme Inc.",
+      "contact_person": "John Acme",
+      "email": "contact@acme.com",
+      "phone": "123-456-7890",
+      "created_at": "2026-08-03T05:51:47.700Z"
+    },
+    {
+      "id": "msctahh0n9lch",
+      "client_name": "Acme Corp Billing",
+      "company_name": "Acme Inc.",
+      "contact_person": "John Acme",
+      "email": "billing@acme.com",
+      "phone": "123-456-7890",
+      "created_at": "2026-08-03T05:51:47.700Z"
+    },
+    {
+      "id": "msctahh1wo2v5",
+      "client_name": "John Doe",
+      "company_name": "Doe Ventures",
+      "contact_person": "John Doe",
+      "email": "john@doe.com",
+      "phone": "987-654-3210",
+      "created_at": "2026-08-03T05:51:47.701Z"
+    },
+    {
+      "id": "msctahh1xntvh",
+      "client_name": "Global Retail",
+      "company_name": "Global Retail LLC",
+      "contact_person": "Sarah Smith",
+      "email": "ops@globalretail.com",
+      "phone": "555-019-2834",
+      "created_at": "2026-08-03T05:51:47.701Z"
+    },
+    {
+      "id": "msctahh1m7fqo",
+      "client_name": "Global Retail Mail",
+      "company_name": "Global Retail LLC",
+      "contact_person": "Sarah Smith",
+      "email": "ops@globalretail.com",
+      "phone": "555-019-2834",
+      "created_at": "2026-08-03T05:51:47.702Z"
+    },
+    {
+      "id": "mscu5xpm6wc9e",
+      "client_name": "Ranjan",
+      "company_name": "RK",
+      "contact_person": "Ranjan",
+      "email": "ranjankumar12729@gmail.com",
+      "phone": "9876543210",
+      "created_at": "2026-08-03T06:16:15.082Z"
+    },
+    {
+      "id": "msczchsup730y",
+      "client_name": "Acme Corp",
+      "company_name": "Acme Inc.",
+      "contact_person": "John Acme",
+      "email": "contact@acme.com",
+      "phone": "123-456-7890",
+      "created_at": "2026-08-03T08:41:19.134Z"
+    },
+    {
+      "id": "msczchsu64avk",
+      "client_name": "Acme Corp Billing",
+      "company_name": "Acme Inc.",
+      "contact_person": "John Acme",
+      "email": "billing@acme.com",
+      "phone": "123-456-7890",
+      "created_at": "2026-08-03T08:41:19.134Z"
+    },
+    {
+      "id": "msczchsvz0mwl",
+      "client_name": "John Doe",
+      "company_name": "Doe Ventures",
+      "contact_person": "John Doe",
+      "email": "john@doe.com",
+      "phone": "987-654-3210",
+      "created_at": "2026-08-03T08:41:19.135Z"
+    },
+    {
+      "id": "msczchsvuhp2q",
+      "client_name": "Global Retail",
+      "company_name": "Global Retail LLC",
+      "contact_person": "Sarah Smith",
+      "email": "ops@globalretail.com",
+      "phone": "555-019-2834",
+      "created_at": "2026-08-03T08:41:19.135Z"
+    },
+    {
+      "id": "msczchswp26o2",
+      "client_name": "Global Retail Mail",
+      "company_name": "Global Retail LLC",
+      "contact_person": "Sarah Smith",
+      "email": "ops@globalretail.com",
+      "phone": "555-019-2834",
+      "created_at": "2026-08-03T08:41:19.136Z"
+    }
+  ],
+  "services": [
+    {
+      "service_id": "acme.com",
+      "client_id": "msct51zzh6fmv",
+      "server_id": "msct51zxonyqo",
+      "active_status": 1,
+      "created_at": "2026-08-03T05:47:34.367Z"
+    },
+    {
+      "service_id": "billing.acme.com",
+      "client_id": "msct5200i6kco",
+      "server_id": "msct51zyftjk3",
+      "active_status": 1,
+      "created_at": "2026-08-03T05:47:34.368Z"
+    },
+    {
+      "service_id": "doe.com",
+      "client_id": "msct5201gttyv",
+      "server_id": "msct51zxonyqo",
+      "active_status": 1,
+      "created_at": "2026-08-03T05:47:34.369Z"
+    },
+    {
+      "service_id": "shop.globalretail.com",
+      "client_id": "msct5201ofa45",
+      "server_id": "msct51zxonyqo",
+      "active_status": 1,
+      "created_at": "2026-08-03T05:47:34.369Z"
+    },
+    {
+      "service_id": "mail.globalretail.com",
+      "client_id": "msct5202pkpei",
+      "server_id": "msct51zyk1rrh",
+      "active_status": 1,
+      "created_at": "2026-08-03T05:47:34.370Z"
+    },
+    {
+      "service_id": "acme.com",
+      "client_id": "msct5itqrltco",
+      "server_id": "msct5itm0u5tq",
+      "active_status": 1,
+      "created_at": "2026-08-03T05:47:56.174Z"
+    },
+    {
+      "service_id": "billing.acme.com",
+      "client_id": "msct5itt2cmv0",
+      "server_id": "msct5itpfoibe",
+      "active_status": 1,
+      "created_at": "2026-08-03T05:47:56.177Z"
+    },
+    {
+      "service_id": "doe.com",
+      "client_id": "msct5ittm4t6k",
+      "server_id": "msct5itm0u5tq",
+      "active_status": 1,
+      "created_at": "2026-08-03T05:47:56.177Z"
+    },
+    {
+      "service_id": "shop.globalretail.com",
+      "client_id": "msct5itubhitm",
+      "server_id": "msct5itm0u5tq",
+      "active_status": 1,
+      "created_at": "2026-08-03T05:47:56.178Z"
+    },
+    {
+      "service_id": "mail.globalretail.com",
+      "client_id": "msct5itu2oebh",
+      "server_id": "msct5itpnuanj",
+      "active_status": 1,
+      "created_at": "2026-08-03T05:47:56.178Z"
+    },
+    {
+      "service_id": "acme.com",
+      "client_id": "msctahh0dwksg",
+      "server_id": "msctahgy7clmq",
+      "active_status": 1,
+      "created_at": "2026-08-03T05:51:47.700Z"
+    },
+    {
+      "service_id": "billing.acme.com",
+      "client_id": "msctahh0n9lch",
+      "server_id": "msctahgzurbid",
+      "active_status": 1,
+      "created_at": "2026-08-03T05:51:47.701Z"
+    },
+    {
+      "service_id": "doe.com",
+      "client_id": "msctahh1wo2v5",
+      "server_id": "msctahgy7clmq",
+      "active_status": 1,
+      "created_at": "2026-08-03T05:51:47.701Z"
+    },
+    {
+      "service_id": "shop.globalretail.com",
+      "client_id": "msctahh1xntvh",
+      "server_id": "msctahgy7clmq",
+      "active_status": 1,
+      "created_at": "2026-08-03T05:51:47.701Z"
+    },
+    {
+      "service_id": "mail.globalretail.com",
+      "client_id": "msctahh1m7fqo",
+      "server_id": "msctahgzg4g8z",
+      "active_status": 1,
+      "created_at": "2026-08-03T05:51:47.702Z"
+    },
+    {
+      "service_id": "example.com",
+      "client_id": "mscu5xpm6wc9e",
+      "server_id": "msct51zxonyqo",
+      "active_status": 1,
+      "created_at": "2026-08-03T06:16:15.082Z"
+    },
+    {
+      "service_id": "acme.com",
+      "client_id": "msczchsup730y",
+      "server_id": "msczchst75tmn",
+      "active_status": 1,
+      "created_at": "2026-08-03T08:41:19.134Z"
+    },
+    {
+      "service_id": "billing.acme.com",
+      "client_id": "msczchsu64avk",
+      "server_id": "msczchstpn822",
+      "active_status": 1,
+      "created_at": "2026-08-03T08:41:19.134Z"
+    },
+    {
+      "service_id": "doe.com",
+      "client_id": "msczchsvz0mwl",
+      "server_id": "msczchst75tmn",
+      "active_status": 1,
+      "created_at": "2026-08-03T08:41:19.135Z"
+    },
+    {
+      "service_id": "shop.globalretail.com",
+      "client_id": "msczchsvuhp2q",
+      "server_id": "msczchst75tmn",
+      "active_status": 1,
+      "created_at": "2026-08-03T08:41:19.135Z"
+    },
+    {
+      "service_id": "mail.globalretail.com",
+      "client_id": "msczchswp26o2",
+      "server_id": "msczchst5ocuu",
+      "active_status": 1,
+      "created_at": "2026-08-03T08:41:19.136Z"
+    }
+  ],
+  "incidents": [
+    {
+      "id": "msct5204xb2t4",
+      "title": "EU Database Performance Degradation",
+      "type": "Degraded Performance",
+      "severity": "Medium",
+      "status": "Resolved",
+      "start_time": "2026-08-03T04:47:34.371Z",
+      "end_time": "2026-08-03T07:47:34.371Z",
+      "description": "We are experiencing higher than normal CPU usage on the EU database server.",
+      "public_message": "EU Database latency is currently increased. Queries might take longer to execute.",
+      "internal_notes": "Investigating slow query logs. Might need to optimize database indexes.",
+      "root_cause": "A massive reporting query ran from an unoptimized background cron.",
+      "expected_resolution": "Indices optimization and cron rescheduling.",
+      "maintenance_window": "",
+      "created_by": "admin",
+      "created_at": "2026-08-03T05:47:34.372Z",
+      "updated_at": "2026-08-03T06:23:11.422Z"
+    },
+    {
+      "id": "msct5205708zs",
+      "status": "Resolved",
+      "created_by": "admin",
+      "created_at": "2026-08-03T05:47:34.373Z",
+      "updated_at": "2026-08-03T08:41:23.459Z"
+    },
+    {
+      "id": "msct5206jsvjw",
+      "title": "Network Outage USA West",
+      "type": "Down",
+      "severity": "Critical",
+      "status": "Resolved",
+      "start_time": "2026-08-03T02:47:34.371Z",
+      "end_time": "2026-08-03T03:47:34.371Z",
+      "description": "A fiber cut near the datacenter caused packet loss and brief disconnection.",
+      "public_message": "Network connectivity has been restored. All services are back online.",
+      "internal_notes": "Upstream ISP resolved the fiber cut.",
+      "root_cause": "Fiber cut.",
+      "expected_resolution": "ISP rerouted traffic.",
+      "maintenance_window": "",
+      "created_by": "admin",
+      "created_at": "2026-08-03T05:47:34.374Z"
+    },
+    {
+      "id": "msct5itv8h2gm",
+      "title": "EU Database Performance Degradation",
+      "type": "Degraded Performance",
+      "severity": "Medium",
+      "status": "Resolved",
+      "start_time": "2026-08-03T04:47:56.179Z",
+      "end_time": "2026-08-03T07:47:56.179Z",
+      "description": "We are experiencing higher than normal CPU usage on the EU database server.",
+      "public_message": "EU Database latency is currently increased. Queries might take longer to execute.",
+      "internal_notes": "Investigating slow query logs. Might need to optimize database indexes.",
+      "root_cause": "A massive reporting query ran from an unoptimized background cron.",
+      "expected_resolution": "Indices optimization and cron rescheduling.",
+      "maintenance_window": "",
+      "created_by": "admin",
+      "created_at": "2026-08-03T05:47:56.179Z",
+      "updated_at": "2026-08-03T06:23:11.422Z"
+    },
+    {
+      "id": "msct5itwh9mpx",
+      "status": "Resolved",
+      "created_by": "admin",
+      "created_at": "2026-08-03T05:47:56.180Z",
+      "updated_at": "2026-08-03T08:41:23.459Z"
+    },
+    {
+      "id": "msct5itwy9bai",
+      "title": "Network Outage USA West",
+      "type": "Down",
+      "severity": "Critical",
+      "status": "Resolved",
+      "start_time": "2026-08-03T02:47:56.179Z",
+      "end_time": "2026-08-03T03:47:56.179Z",
+      "description": "A fiber cut near the datacenter caused packet loss and brief disconnection.",
+      "public_message": "Network connectivity has been restored. All services are back online.",
+      "internal_notes": "Upstream ISP resolved the fiber cut.",
+      "root_cause": "Fiber cut.",
+      "expected_resolution": "ISP rerouted traffic.",
+      "maintenance_window": "",
+      "created_by": "admin",
+      "created_at": "2026-08-03T05:47:56.180Z"
+    },
+    {
+      "id": "msctahh26qzh9",
+      "title": "EU Database Performance Degradation",
+      "type": "Degraded Performance",
+      "severity": "Medium",
+      "status": "Resolved",
+      "start_time": "2026-08-03T04:51:47.702Z",
+      "end_time": "2026-08-03T07:51:47.702Z",
+      "description": "We are experiencing higher than normal CPU usage on the EU database server.",
+      "public_message": "EU Database latency is currently increased. Queries might take longer to execute.",
+      "internal_notes": "Investigating slow query logs. Might need to optimize database indexes.",
+      "root_cause": "A massive reporting query ran from an unoptimized background cron.",
+      "expected_resolution": "Indices optimization and cron rescheduling.",
+      "maintenance_window": "",
+      "created_by": "admin",
+      "created_at": "2026-08-03T05:51:47.702Z",
+      "updated_at": "2026-08-03T06:23:11.422Z"
+    },
+    {
+      "id": "msctahh3bxher",
+      "status": "Active",
+      "created_by": "admin",
+      "created_at": "2026-08-03T05:51:47.703Z",
+      "updated_at": "2026-08-03T08:41:27.292Z"
+    },
+    {
+      "id": "msctahh4ydjgu",
+      "title": "Network Outage USA West",
+      "type": "Down",
+      "severity": "Critical",
+      "status": "Resolved",
+      "start_time": "2026-08-03T02:51:47.702Z",
+      "end_time": "2026-08-03T03:51:47.702Z",
+      "description": "A fiber cut near the datacenter caused packet loss and brief disconnection.",
+      "public_message": "Network connectivity has been restored. All services are back online.",
+      "internal_notes": "Upstream ISP resolved the fiber cut.",
+      "root_cause": "Fiber cut.",
+      "expected_resolution": "ISP rerouted traffic.",
+      "maintenance_window": "",
+      "created_by": "admin",
+      "created_at": "2026-08-03T05:51:47.704Z"
+    },
+    {
+      "id": "mscuf5z7sjy7l",
+      "title": "server issue",
+      "type": "Down",
+      "severity": "High",
+      "status": "Resolved",
+      "start_time": "2026-08-03T11:52",
+      "end_time": "2026-08-03T12:52",
+      "description": "solving\n",
+      "public_message": "",
+      "internal_notes": "",
+      "root_cause": "",
+      "expected_resolution": "",
+      "maintenance_window": "",
+      "created_by": "admin",
+      "created_at": "2026-08-03T06:23:25.699Z",
+      "updated_at": "2026-08-03T07:17:00.028Z"
+    },
+    {
+      "id": "msczchswldjcn",
+      "title": "EU Database Performance Degradation",
+      "type": "Degraded Performance",
+      "severity": "Medium",
+      "status": "Resolved",
+      "start_time": "2026-08-03T07:41:19.136Z",
+      "end_time": "2026-08-03T10:41:19.136Z",
+      "description": "We are experiencing higher than normal CPU usage on the EU database server.",
+      "public_message": "EU Database latency is currently increased. Queries might take longer to execute.",
+      "internal_notes": "Investigating slow query logs. Might need to optimize database indexes.",
+      "root_cause": "A massive reporting query ran from an unoptimized background cron.",
+      "expected_resolution": "Indices optimization and cron rescheduling.",
+      "maintenance_window": "",
+      "created_by": "admin",
+      "reminder_sent": false,
+      "created_at": "2026-08-03T08:41:19.136Z",
+      "updated_at": "2026-08-03T08:41:23.459Z"
+    },
+    {
+      "id": "msczchsx4b81q",
+      "title": "APAC Mail Gateway Upgrades",
+      "type": "Maintenance",
+      "severity": "Low",
+      "status": "Scheduled",
+      "start_time": "2026-08-03T09:26:19.136Z",
+      "end_time": "2026-08-03T10:41:19.136Z",
+      "description": "Scheduled security patching and hardware maintenance on the Singapore gateway.",
+      "public_message": "Email routing in APAC region may experience brief interruptions of 5-10 minutes.",
+      "internal_notes": "Apply OS security updates.",
+      "root_cause": "Regular maintenance window.",
+      "expected_resolution": "OS patching and system reboot.",
+      "maintenance_window": "45 mins",
+      "created_by": "admin",
+      "reminder_sent": true,
+      "created_at": "2026-08-03T08:41:19.137Z"
+    },
+    {
+      "id": "msczchsx9mejp",
+      "title": "Network Outage USA West",
+      "type": "Down",
+      "severity": "Critical",
+      "status": "Resolved",
+      "start_time": "2026-08-03T05:41:19.136Z",
+      "end_time": "2026-08-03T06:41:19.136Z",
+      "description": "A fiber cut near the datacenter caused packet loss and brief disconnection.",
+      "public_message": "Network connectivity has been restored. All services are back online.",
+      "internal_notes": "Upstream ISP resolved the fiber cut.",
+      "root_cause": "Fiber cut.",
+      "expected_resolution": "ISP rerouted traffic.",
+      "maintenance_window": "",
+      "created_by": "admin",
+      "reminder_sent": false,
+      "created_at": "2026-08-03T08:41:19.137Z"
+    }
+  ],
+  "incident_servers": [
+    {
+      "incident_id": "msct5204xb2t4",
+      "server_id": "msct51zyftjk3"
+    },
+    {
+      "incident_id": "msct5206jsvjw",
+      "server_id": "msct51zxonyqo"
+    },
+    {
+      "incident_id": "msct5itv8h2gm",
+      "server_id": "msct5itpfoibe"
+    },
+    {
+      "incident_id": "msct5itwy9bai",
+      "server_id": "msct5itm0u5tq"
+    },
+    {
+      "incident_id": "msctahh26qzh9",
+      "server_id": "msctahgzurbid"
+    },
+    {
+      "incident_id": "msctahh4ydjgu",
+      "server_id": "msctahgy7clmq"
+    },
+    {
+      "incident_id": "mscuf5z7sjy7l",
+      "server_id": "msct51zxonyqo"
+    },
+    {
+      "incident_id": "msczchswldjcn",
+      "server_id": "msczchstpn822"
+    },
+    {
+      "incident_id": "msczchsx4b81q",
+      "server_id": "msczchst5ocuu"
+    },
+    {
+      "incident_id": "msczchsx9mejp",
+      "server_id": "msczchst75tmn"
+    }
+  ],
+  "incident_services": [
+    {
+      "incident_id": "msct5204xb2t4",
+      "service_id": "billing.acme.com",
+      "is_affected": 1
+    },
+    {
+      "incident_id": "msct5206jsvjw",
+      "service_id": "acme.com",
+      "is_affected": 1
+    },
+    {
+      "incident_id": "msct5206jsvjw",
+      "service_id": "doe.com",
+      "is_affected": 1
+    },
+    {
+      "incident_id": "msct5206jsvjw",
+      "service_id": "shop.globalretail.com",
+      "is_affected": 1
+    },
+    {
+      "incident_id": "msct5itv8h2gm",
+      "service_id": "billing.acme.com",
+      "is_affected": 1
+    },
+    {
+      "incident_id": "msct5itwy9bai",
+      "service_id": "acme.com",
+      "is_affected": 1
+    },
+    {
+      "incident_id": "msct5itwy9bai",
+      "service_id": "doe.com",
+      "is_affected": 1
+    },
+    {
+      "incident_id": "msct5itwy9bai",
+      "service_id": "shop.globalretail.com",
+      "is_affected": 1
+    },
+    {
+      "incident_id": "msctahh26qzh9",
+      "service_id": "billing.acme.com",
+      "is_affected": 1
+    },
+    {
+      "incident_id": "msctahh4ydjgu",
+      "service_id": "acme.com",
+      "is_affected": 1
+    },
+    {
+      "incident_id": "msctahh4ydjgu",
+      "service_id": "doe.com",
+      "is_affected": 1
+    },
+    {
+      "incident_id": "msctahh4ydjgu",
+      "service_id": "shop.globalretail.com",
+      "is_affected": 1
+    },
+    {
+      "incident_id": "mscuf5z7sjy7l",
+      "service_id": "acme.com",
+      "is_affected": 0
+    },
+    {
+      "incident_id": "mscuf5z7sjy7l",
+      "service_id": "doe.com",
+      "is_affected": 0
+    },
+    {
+      "incident_id": "mscuf5z7sjy7l",
+      "service_id": "shop.globalretail.com",
+      "is_affected": 0
+    },
+    {
+      "incident_id": "mscuf5z7sjy7l",
+      "service_id": "example.com",
+      "is_affected": 1
+    },
+    {
+      "incident_id": "msczchswldjcn",
+      "service_id": "billing.acme.com",
+      "is_affected": 1
+    },
+    {
+      "incident_id": "msczchsx4b81q",
+      "service_id": "mail.globalretail.com",
+      "is_affected": 1
+    },
+    {
+      "incident_id": "msczchsx9mejp",
+      "service_id": "acme.com",
+      "is_affected": 1
+    },
+    {
+      "incident_id": "msczchsx9mejp",
+      "service_id": "doe.com",
+      "is_affected": 1
+    },
+    {
+      "incident_id": "msczchsx9mejp",
+      "service_id": "shop.globalretail.com",
+      "is_affected": 1
+    }
+  ],
+  "email_logs": [
+    {
+      "incident_id": "msct5204xb2t4",
+      "service_id": "billing.acme.com",
+      "email_type": "Resolved",
+      "created_at": "2026-08-03T06:23:16.241Z"
+    },
+    {
+      "incident_id": "msct5itv8h2gm",
+      "service_id": "billing.acme.com",
+      "email_type": "Resolved",
+      "created_at": "2026-08-03T06:23:20.972Z"
+    },
+    {
+      "incident_id": "msctahh26qzh9",
+      "service_id": "billing.acme.com",
+      "email_type": "Resolved",
+      "created_at": "2026-08-03T06:23:25.685Z"
+    },
+    {
+      "incident_id": "mscuf5z7sjy7l",
+      "service_id": "example.com",
+      "email_type": "Active",
+      "created_at": "2026-08-03T06:23:30.190Z"
+    },
+    {
+      "incident_id": "msczchswldjcn",
+      "service_id": "billing.acme.com",
+      "email_type": "Resolved",
+      "created_at": "2026-08-03T08:41:27.280Z"
+    },
+    {
+      "incident_id": "msczchsx4b81q",
+      "service_id": "mail.globalretail.com",
+      "email_type": "Reminder",
+      "created_at": "2026-08-03T08:41:30.814Z"
+    },
+    {
+      "incident_id": "msczchsx4b81q",
+      "service_id": "mail.globalretail.com",
+      "email_type": "Reminder",
+      "created_at": "2026-08-03T08:41:34.271Z"
+    },
+    {
+      "incident_id": "msczchsx4b81q",
+      "service_id": "mail.globalretail.com",
+      "email_type": "Reminder",
+      "created_at": "2026-08-03T08:41:37.747Z"
+    },
+    {
+      "incident_id": "msczchsx4b81q",
+      "service_id": "mail.globalretail.com",
+      "email_type": "Reminder",
+      "created_at": "2026-08-03T08:41:41.211Z"
+    }
+  ]
+}

@@ -1,54 +1,41 @@
-const { query } = require('./db');
+const { Incident } = require('./models/db-adapter');
 const { sendIncidentEmail } = require('./mail');
 
 async function sendTransitionEmails(incident, state) {
   try {
-    const affectedServices = await query.all(`
-      SELECT s.service_id, c.email
-      FROM incident_services ins
-      JOIN services s ON ins.service_id = s.service_id
-      JOIN clients c ON s.client_id = c.id
-      WHERE ins.incident_id = ? AND ins.is_affected = 1
-    `, [incident.id]);
+    const affectedServices = await Incident.getAffectedClients(incident.id || incident._id);
 
-    console.log(`[Jobs] Preparing to send [${state}] emails for incident ${incident.id} to ${affectedServices.length} client(s)...`);
+    console.log(`[Jobs] Preparing to send [${state}] emails for incident ${incident.id || incident._id} to ${affectedServices.length} client(s)...`);
 
     for (const service of affectedServices) {
-      const alreadySent = await query.get(`
-        SELECT id FROM email_logs
-        WHERE incident_id = ? AND service_id = ? AND email_type = ?
-      `, [incident.id, service.service_id, state]);
+      const alreadySent = await Incident.isEmailLogged(incident.id || incident._id, service.service_id, state);
 
       if (!alreadySent) {
         console.log(`[Jobs] Dispatching ${state} email to ${service.email} (Domain: ${service.service_id})`);
         await sendIncidentEmail(incident, service.service_id, service.email, state);
-        await query.run(`
-          INSERT INTO email_logs (incident_id, service_id, email_type)
-          VALUES (?, ?, ?)
-        `, [incident.id, service.service_id, state]);
+        await Incident.logEmail(incident.id || incident._id, service.service_id, state);
       }
     }
   } catch (err) {
-    console.error(`[Jobs] Error dispatching transition emails for incident ${incident.id}:`, err);
+    console.error(`[Jobs] Error dispatching transition emails for incident ${incident.id || incident._id}:`, err);
   }
 }
 
 async function activateIncident(incidentId, timestamp) {
   console.log(`[Jobs] Activating incident ID: ${incidentId}...`);
 
-  const activeIncidents = await query.all("SELECT id FROM incidents WHERE status = 'Active' AND id != ?", [incidentId]);
-  for (const activeInc of activeIncidents) {
-    console.log(`[Jobs] Enforcing single-active rule: Resolving previously active incident ID: ${activeInc.id}`);
-    await resolveIncident(activeInc.id, timestamp);
+  // Enforce single active rule: Resolve other active incidents first
+  const resolvedList = await Incident.resolveOtherActive(incidentId, timestamp);
+  for (const activeInc of resolvedList) {
+    console.log(`[Jobs] Enforcing single-active rule: Resolving previously active incident ID: ${activeInc.id || activeInc._id}`);
+    if (activeInc.type !== 'Maintenance') {
+      await sendTransitionEmails(activeInc, 'Resolved');
+    }
   }
 
-  await query.run(`
-    UPDATE incidents
-    SET status = 'Active', updated_at = ?
-    WHERE id = ?
-  `, [timestamp, incidentId]);
+  await Incident.update(incidentId, { status: 'Active', updated_at: timestamp });
 
-  const incident = await query.get('SELECT * FROM incidents WHERE id = ?', [incidentId]);
+  const incident = await Incident.findById(incidentId);
   if (incident && incident.type !== 'Maintenance') {
     await sendTransitionEmails(incident, 'Active');
   } else {
@@ -59,13 +46,9 @@ async function activateIncident(incidentId, timestamp) {
 async function resolveIncident(incidentId, timestamp) {
   console.log(`[Jobs] Resolving incident ID: ${incidentId}...`);
 
-  await query.run(`
-    UPDATE incidents
-    SET status = 'Resolved', updated_at = ?
-    WHERE id = ?
-  `, [timestamp, incidentId]);
+  await Incident.update(incidentId, { status: 'Resolved', updated_at: timestamp });
 
-  const incident = await query.get('SELECT * FROM incidents WHERE id = ?', [incidentId]);
+  const incident = await Incident.findById(incidentId);
   if (incident && incident.type !== 'Maintenance') {
     await sendTransitionEmails(incident, 'Resolved');
   } else {
@@ -78,29 +61,38 @@ async function runIncidentJobs() {
   const now = new Date().toISOString();
 
   try {
-    const dueScheduled = await query.all(`
-      SELECT * FROM incidents
-      WHERE status = 'Scheduled' AND start_time <= ?
-      ORDER BY start_time ASC
-    `, [now]);
+    const dueScheduled = await Incident.getDueScheduled(now);
 
     if (dueScheduled.length > 0) {
       console.log(`[Jobs] Found ${dueScheduled.length} scheduled incident(s) due to start.`);
       for (const incident of dueScheduled) {
-        await activateIncident(incident.id, now);
+        await activateIncident(incident.id || incident._id, now);
       }
     }
 
-    const dueActive = await query.all(`
-      SELECT * FROM incidents
-      WHERE status = 'Active' AND end_time <= ?
-      ORDER BY end_time ASC
-    `, [now]);
+    const dueActive = await Incident.getDueActive(now);
 
     if (dueActive.length > 0) {
       console.log(`[Jobs] Found ${dueActive.length} active incident(s) due to end.`);
       for (const incident of dueActive) {
-        await resolveIncident(incident.id, now);
+        await resolveIncident(incident.id || incident._id, now);
+      }
+    }
+
+    // 1-hour pre-outage reminder notification check
+    const dueReminders = await Incident.getDueReminders(now);
+    if (dueReminders.length > 0) {
+      console.log(`[Jobs] Found ${dueReminders.length} scheduled incident(s) due for 1-hour reminder.`);
+      for (const incident of dueReminders) {
+        console.log(`[Jobs] Dispatching 1-hour reminders for incident ID: ${incident.id || incident._id}...`);
+        const affectedServices = await Incident.getAffectedClients(incident.id || incident._id);
+        
+        for (const service of affectedServices) {
+          await sendIncidentEmail(incident, service.service_id, service.email, 'Reminder');
+          await Incident.logEmail(incident.id || incident._id, service.service_id, 'Reminder');
+        }
+        
+        await Incident.markReminderSent(incident.id || incident._id);
       }
     }
   } catch (err) {

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 600" width="256" height="256">
+  <!-- Blue Rectangle -->
+  <rect x="80" y="60" width="240" height="80" rx="8" fill="#4F3EFF"/>
+  
+  <!-- Blue Circle -->
+  <circle cx="420" cy="100" r="55" fill="#4F3EFF"/>
+  
+  <!-- Black Cup/Glass with White Interior -->
+  <g>
+    <!-- Outer cup shape -->
+    <path d="M 100 220 L 85 320 Q 85 420 250 450 Q 415 420 415 320 L 400 220 Z" fill="#000000"/>
+    
+    <!-- White inner space -->
+    <path d="M 150 260 L 140 320 Q 140 390 250 410 Q 360 390 360 320 L 350 260 Z" fill="white"/>
+  </g>
+</svg>

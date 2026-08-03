@@ -5,6 +5,7 @@
   "main": "backend/server.js",
   "scripts": {
     "start": "node backend/server.js",
+    "build": "npm install && npm install --prefix frontend && npm run build --prefix frontend",
     "seed": "node backend/seed.js",
     "test": "node backend/test.js"
   },
@@ -17,8 +18,8 @@
     "express": "^4.19.2",
     "express-session": "^1.18.0",
     "express-validator": "^7.1.0",
+    "mongoose": "^8.3.1",
     "node-cron": "^3.0.3",
-    "nodemailer": "^6.9.13",
-    "sqlite3": "^5.1.7"
+    "nodemailer": "^6.9.13"
   }
 }

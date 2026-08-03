@@ -1,7 +1,7 @@
 const cron = require('node-cron');
-const { query } = require('./db');
+const { Incident } = require('./models/db-adapter');
 const { sendIncidentEmail } = require('./mail');
-const { runIncidentJobs, activateIncident, resolveIncident } = require('./job-crons');
+const { runIncidentJobs } = require('./job-crons');
 
 /**
  * Scan database and trigger status lifecycle updates.
@@ -15,11 +15,11 @@ async function runReminderCron() {
  * Triggers status notifications manually for a specific incident.
  * Sends 'Active' (Initial) or 'Resolved' alerts based on current status.
  * Bypasses email notification if the incident type is 'Maintenance'.
- * @param {number} incidentId 
+ * @param {number|string} incidentId 
  */
 async function sendManualReminders(incidentId) {
   try {
-    const incident = await query.get('SELECT * FROM incidents WHERE id = ?', [incidentId]);
+    const incident = await Incident.findById(incidentId);
     if (!incident) {
       throw new Error(`Incident not found: ${incidentId}`);
     }
@@ -31,13 +31,7 @@ async function sendManualReminders(incidentId) {
 
     const emailType = incident.status === 'Resolved' ? 'Resolved' : 'Active';
 
-    const affectedServices = await query.all(`
-      SELECT s.service_id, c.email 
-      FROM incident_services ins
-      JOIN services s ON ins.service_id = s.service_id
-      JOIN clients c ON s.client_id = c.id
-      WHERE ins.incident_id = ? AND ins.is_affected = 1
-    `, [incidentId]);
+    const affectedServices = await Incident.getAffectedClients(incidentId);
 
     console.log(`[Manual Notify] Manually sending [${emailType}] notifications for incident ${incidentId} to ${affectedServices.length} client(s)...`);
 
@@ -45,10 +39,7 @@ async function sendManualReminders(incidentId) {
       await sendIncidentEmail(incident, service.service_id, service.email, emailType);
       
       // Log it
-      await query.run(`
-        INSERT INTO email_logs (incident_id, service_id, email_type)
-        VALUES (?, ?, ?)
-      `, [incidentId, service.service_id, emailType]);
+      await Incident.logEmail(incidentId, service.service_id, emailType);
     }
     
     return affectedServices.length;

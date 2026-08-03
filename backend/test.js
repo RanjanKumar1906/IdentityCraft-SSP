@@ -2,7 +2,7 @@ const assert = require('assert');
 const bcrypt = require('bcryptjs');
 const fs = require('fs');
 const path = require('path');
-const { query, initDb } = require('./src/db');
+const { Server, Admin, useMongo } = require('./src/models/db-adapter');
 const { hashPassword, comparePassword } = require('./src/auth');
 const { sendIncidentEmail, sendAdminPasswordEmail } = require('./src/mail');
 
@@ -39,16 +39,19 @@ async function runTests() {
 
   // Test 4: Database connectivity and schemas
   console.log('Running Test 4: Database query validation...');
-  await initDb();
-  const testServer = await query.run(
-    'INSERT INTO servers (server_name, server_code, ip_address, location, status) VALUES (?, ?, ?, ?, ?)',
-    ['Test Server', 'SRV-TEST', '127.0.0.1', 'Localhouse', 'Operational']
-  );
-  assert.ok(testServer.lastID > 0, 'Should insert server successfully');
-  const serverRow = await query.get('SELECT * FROM servers WHERE id = ?', [testServer.lastID]);
+  const testServer = await Server.create({
+    server_name: 'Test Server',
+    server_code: 'SRV-TEST',
+    ip_address: '127.0.0.1',
+    location: 'Localhouse',
+    status: 'Operational',
+    description: 'Testing unified repository operations'
+  });
+  assert.ok(testServer.id || testServer._id, 'Should insert server successfully');
+  const serverRow = await Server.findById(testServer.id || testServer._id);
   assert.equal(serverRow.server_code, 'SRV-TEST', 'Fetched server code should match inserted code');
   // Clean up
-  await query.run('DELETE FROM servers WHERE id = ?', [testServer.lastID]);
+  await Server.delete(testServer.id || testServer._id);
   console.log('✓ Test 4 Passed.');
 
   // Test 5: Email notification logging
@@ -80,6 +83,50 @@ async function runTests() {
   const latestAdminEmailContent = fs.readFileSync(path.join(emailLogDir, latestAdminEmail), 'utf-8');
   assert.ok(latestAdminEmailContent.includes('Temporary Password'), 'Admin email should mention the temporary password');
   console.log('✓ Test 6 Passed.');
+
+  // Test 7: Password Reset token link generation & reset endpoint
+  console.log('Running Test 7: Password reset token and recovery...');
+  const testAdmin = await Admin.create({
+    username: 'test_reset_user',
+    email: 'reset@example.com',
+    password_hash: 'dummy',
+    secret_code: 'ResetSecret!'
+  });
+  assert.ok(testAdmin, 'Should create test admin');
+  
+  // Update with reset token
+  const testToken = 'reset_token_xyz_123';
+  const testExpiry = new Date(Date.now() + 15 * 60 * 1000).toISOString();
+  await Admin.update(testAdmin.id || testAdmin._id, {
+    reset_token: testToken,
+    reset_token_expires: testExpiry
+  });
+  
+  // Find by reset token
+  const retrievedAdmin = await Admin.findByResetToken(testToken);
+  assert.ok(retrievedAdmin, 'Should fetch admin by reset token');
+  assert.equal(retrievedAdmin.email, 'reset@example.com', 'Fetched admin email should match');
+  
+  // Reset password
+  await Admin.updatePassword(testAdmin.id || testAdmin._id, 'new_hash_val');
+  const updatedAdmin = await Admin.findById(testAdmin.id || testAdmin._id);
+  assert.equal(updatedAdmin.password_hash, 'new_hash_val', 'Password hash should be updated');
+  assert.ok(!updatedAdmin.reset_token, 'Reset token should be cleared');
+  assert.ok(!updatedAdmin.reset_token_expires, 'Reset token expiry should be cleared');
+  
+  // Cleanup test admin
+  if (useMongo) {
+    const mongoose = require('mongoose');
+    await mongoose.models.Admin.findByIdAndDelete(testAdmin._id);
+  } else {
+    const jsonRepo = require('./src/models/json-repo');
+    const fs = require('fs');
+    const dbPath = path.join(__dirname, 'data', 'db.json');
+    const db = JSON.parse(fs.readFileSync(dbPath, 'utf8'));
+    db.admins = db.admins.filter(a => String(a.id) !== String(testAdmin.id));
+    fs.writeFileSync(dbPath, JSON.stringify(db, null, 2), 'utf8');
+  }
+  console.log('✓ Test 7 Passed.');
 
   console.log('--- ALL TESTS PASSED SUCCESSFULLY! ---');
   process.exit(0);
