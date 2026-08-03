@@ -1,4 +1,4 @@
-require('dotenv').config();
+require('dotenv').config({ path: require('path').join(__dirname, '.env') });
 const express = require('express');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
@@ -16,10 +16,10 @@ const PORT = process.env.PORT || 3000;
 
 // Setup Template Engine
 app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, '..', 'frontend', 'views'));
 
 // Static assets
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '..', 'frontend', 'public')));
 
 // Request parsing
 app.use(express.urlencoded({ extended: true }));

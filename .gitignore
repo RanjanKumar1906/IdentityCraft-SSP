@@ -3,5 +3,7 @@ node_modules/
 .data/
 data/*.sqlite
 data/sent_emails/
+backend/data/*.sqlite
+backend/data/sent_emails/
 npm-debug.log*
 .DS_Store

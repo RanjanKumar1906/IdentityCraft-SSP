@@ -49,7 +49,7 @@ Ensure you have **Node.js** (v24.12.0+) and **NPM** installed.
     RECAPTCHA_SITE_KEY=
     RECAPTCHA_SECRET_KEY=
 
-    # Optional SMTP configuration (leave blank to only save emails to data/sent_emails/)
+    # Optional SMTP configuration (leave blank to only save emails to backend/data/sent_emails/)
     SMTP_HOST=
     SMTP_PORT=587
     SMTP_USER=
@@ -80,7 +80,7 @@ Ensure you have **Node.js** (v24.12.0+) and **NPM** installed.
 
 ## Database Normalization Schema
 
-The SQLite schema is fully normalized inside `src/db.js` into 8 separate tables, ensuring data integrity:
+The SQLite schema is fully normalized inside `backend/src/db.js` into 8 separate tables, ensuring data integrity:
 
 ```mermaid
 erDiagram
@@ -173,4 +173,4 @@ Execute the automated assertion testing suite:
 ```bash
 npm test
 ```
-The suite verifies password comparison accuracy, domain validation regex, incident date rules, SQLite table operations, and verifies that email bodies generate correctly inside `data/sent_emails/`.
+The suite verifies password comparison accuracy, domain validation regex, incident date rules, SQLite table operations, and verifies that email bodies generate correctly inside `backend/data/sent_emails/`.

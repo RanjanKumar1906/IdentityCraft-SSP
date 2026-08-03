@@ -2,11 +2,11 @@
   "name": "service-status-portal",
   "version": "1.0.0",
   "description": "Service Status Web Portal",
-  "main": "server.js",
+  "main": "backend/server.js",
   "scripts": {
-    "start": "node server.js",
-    "seed": "node seed.js",
-    "test": "node test.js"
+    "start": "node backend/server.js",
+    "seed": "node backend/seed.js",
+    "test": "node backend/test.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
