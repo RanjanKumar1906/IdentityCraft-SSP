@@ -608,10 +608,10 @@
     },
     {
       "id": "msctahh3bxher",
-      "status": "Active",
+      "status": "Resolved",
       "created_by": "admin",
       "created_at": "2026-08-03T05:51:47.703Z",
-      "updated_at": "2026-08-03T08:41:27.292Z"
+      "updated_at": "2026-08-03T09:31:50.103Z"
     },
     {
       "id": "msctahh4ydjgu",
@@ -669,21 +669,11 @@
     },
     {
       "id": "msczchsx4b81q",
-      "title": "APAC Mail Gateway Upgrades",
-      "type": "Maintenance",
-      "severity": "Low",
-      "status": "Scheduled",
-      "start_time": "2026-08-03T09:26:19.136Z",
-      "end_time": "2026-08-03T10:41:19.136Z",
-      "description": "Scheduled security patching and hardware maintenance on the Singapore gateway.",
-      "public_message": "Email routing in APAC region may experience brief interruptions of 5-10 minutes.",
-      "internal_notes": "Apply OS security updates.",
-      "root_cause": "Regular maintenance window.",
-      "expected_resolution": "OS patching and system reboot.",
-      "maintenance_window": "45 mins",
+      "status": "Active",
       "created_by": "admin",
       "reminder_sent": true,
-      "created_at": "2026-08-03T08:41:19.137Z"
+      "created_at": "2026-08-03T08:41:19.137Z",
+      "updated_at": "2026-08-03T09:31:50.111Z"
     },
     {
       "id": "msczchsx9mejp",
@@ -736,10 +726,6 @@
     {
       "incident_id": "msczchswldjcn",
       "server_id": "msczchstpn822"
-    },
-    {
-      "incident_id": "msczchsx4b81q",
-      "server_id": "msczchst5ocuu"
     },
     {
       "incident_id": "msczchsx9mejp",
@@ -830,11 +816,6 @@
     {
       "incident_id": "msczchswldjcn",
       "service_id": "billing.acme.com",
-      "is_affected": 1
-    },
-    {
-      "incident_id": "msczchsx4b81q",
-      "service_id": "mail.globalretail.com",
       "is_affected": 1
     },
     {
