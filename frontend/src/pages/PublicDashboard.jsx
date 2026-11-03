@@ -116,7 +116,7 @@ export default function PublicDashboard() {
               <input 
                 type="text" 
                 className="form-control" 
-                placeholder="domain.com or service-id" 
+                placeholder="domain.com" 
                 value={searchQuery}
                 onChange={(e) => {
                   setSearchQuery(e.target.value);
