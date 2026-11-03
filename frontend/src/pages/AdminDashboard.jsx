@@ -1,4 +1,4 @@
-                      <select 
+                      <select
                         className="form-select" 
                         value={incidentForm.selectedClientService} 
                         onChange={(e) => setIncidentForm(prev => ({ ...prev, selectedClientService: e.target.value }))}
