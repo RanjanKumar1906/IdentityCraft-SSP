@@ -1,7 +1,3 @@
-console.log("SMTP Enabled:", useSMTP);
-console.log("SMTP Host:", process.env.SMTP_HOST);
-console.log("SMTP User:", process.env.SMTP_USER);
-console.log("SMTP Pass Exists:", !!process.env.SMTP_PASS);
 
 const nodemailer = require('nodemailer');
 const fs = require('fs');
@@ -14,7 +10,12 @@ if (!fs.existsSync(emailLogDir)) {
 
 // Setup transporter based on environment variables
 let transporter = null;
-const useSMTP = process.env.SMTP_HOST ? true : false;
+const useSMTP = Boolean(process.env.SMTP_HOST);
+
+console.log("SMTP Enabled:", useSMTP);
+console.log("SMTP Host:", process.env.SMTP_HOST || "Not configured");
+console.log("SMTP User:", process.env.SMTP_USER || "Not configured");
+console.log("SMTP Pass Exists:", Boolean(process.env.SMTP_PASS));
 
 if (useSMTP) {
   transporter = nodemailer.createTransport({
